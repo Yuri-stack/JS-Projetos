@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Efeito de Máquina de Escrever com JavaScript</title>
+
+        <style>
+            body {
+              background: #0e1013;
+            }
+
+            h1, p, div {
+              max-width: 480px;
+              text-align: center;
+              margin: 60px auto;
+              font-family: 'Courier New', Courier, monospace;
+              color: #fff;
+            }
+
+            h1::after{
+                content: '|';
+                margin-left: 5px;
+                opacity: 1;
+                animation: blink .7s infinite;
+            }
+
+            @keyframes blink{
+                0%, 100%{
+                    opacity: 0;
+                }
+                50%{
+                    opacity: 1;
+                }
+            }
+
+          </style>
+
+    </head>
+    
+    <body>
+        <h1>Efeito de Máquina de Escrever com JavaScript</h1>
+
+        <p>
+            Paragráfo de teste
+        </p>
+
+        <div class="container">
+            Paragráfo de teste 2
+        </div>
+
+    </body>
+
+    <script>
+
+        const title = document.querySelector('h1')              //pega o elemento
+
+        function typeWriter(element){                           //criando a função
+            const arrayText = element.innerHTML.split('')       //pega o conteúdo dentro da tag HTML e divide cada item com o split
+            
+            element.innerHTML = ""                              //inicia o H1 vazio
+
+            arrayText.forEach((letra, index) => {               //letra é cada item, e index é o número de ocorrencia da letra
+                
+                setTimeout(() => {                              //função que inicia instantaneamente usando um cronometro                              
+                    element.innerHTML += letra                  //coloca cada item do array
+                }, 75 * index)                                  //a função vai funcionar em 75ms para cada item do array
+
+                // setTimeout(() => element.innerHTML += letra, 75 * index)
+
+            })
+        }
+
+        typeWriter(title)
+        typeWriter(document.querySelector('p'))
+        typeWriter(document.querySelector('.container'))
+
+    </script>
+
+</html>
